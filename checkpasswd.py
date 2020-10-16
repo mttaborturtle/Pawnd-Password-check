@@ -29,7 +29,7 @@ def get_password_leaks_count(hashes, hash_to_check):
     return 0
 
 
-# This hashes and splits your password in order to share it with the internet.
+# This hashes and splits your password in order to safely share it with the internet
 def pwned_api_check(password):
     sha1password = hashlib.sha1(password.encode('utf-8')).hexdigest().upper()
     first5_char, tail = sha1password[:5], sha1password[5:]
@@ -37,7 +37,8 @@ def pwned_api_check(password):
     return get_password_leaks_count(response, tail)
 
 
-# #Uncomment and call this function if you want to input the password from the command line
+# # Uncomment and call this function below if you want to input the password from the command line instead
+# # Dont forget to comment the input command at the top if you use this function
 # def main_command(args):
 #     for password in args:
 #         count = pwned_api_check(password)
@@ -49,7 +50,7 @@ def pwned_api_check(password):
 #             print(f'{first_lettrs}****** was NOT found. Good job! Use it.')
 #     return 'Done!'
 
-# This is the function that does all the checking work and prints the information returned.
+# This is the function that does the checking work and prints the information returned
 def main(password):
     count = pwned_api_check(password)
     first_lettrs = password[:5]
